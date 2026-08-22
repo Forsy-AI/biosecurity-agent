@@ -1,0 +1,10 @@
+node_modules
+.git
+.biosecurity-agent
+apps/*/dist
+packages/*/dist
+coverage
+playwright-report
+test-results
+huggingface-dataset-01
+*.tgz

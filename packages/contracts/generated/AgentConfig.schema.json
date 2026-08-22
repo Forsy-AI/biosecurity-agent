@@ -1,0 +1,52 @@
+{
+  "$ref": "#/definitions/AgentConfig",
+  "definitions": {
+    "AgentConfig": {
+      "type": "object",
+      "properties": {
+        "provider": {
+          "type": "string",
+          "enum": ["mock", "codex", "anthropic", "openai-compatible", "ollama", "generic-http"]
+        },
+        "model": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 200
+        },
+        "endpoint": {
+          "type": "string",
+          "format": "uri"
+        },
+        "apiKey": {
+          "type": "string",
+          "maxLength": 10000
+        },
+        "instructions": {
+          "type": "string",
+          "maxLength": 30000,
+          "default": ""
+        },
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "temperature": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 2
+            },
+            "maxTokens": {
+              "type": "integer",
+              "exclusiveMinimum": 0,
+              "maximum": 100000
+            }
+          },
+          "additionalProperties": {},
+          "default": {}
+        }
+      },
+      "required": ["provider", "model"],
+      "additionalProperties": false
+    }
+  },
+  "$schema": "http://json-schema.org/draft-07/schema#"
+}

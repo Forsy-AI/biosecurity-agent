@@ -1,0 +1,161 @@
+{
+  "$ref": "#/definitions/WorldSnapshot",
+  "definitions": {
+    "WorldSnapshot": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 160
+        },
+        "worldId": {
+          "$ref": "#/definitions/WorldSnapshot/properties/id"
+        },
+        "asOf": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "targetIds": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/WorldSnapshot/properties/id"
+          }
+        },
+        "entityIds": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/WorldSnapshot/properties/id"
+          }
+        },
+        "claimIds": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/WorldSnapshot/properties/id"
+          }
+        },
+        "materialChanges": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "$ref": "#/definitions/WorldSnapshot/properties/id"
+              },
+              "summary": {
+                "type": "string",
+                "minLength": 1
+              },
+              "targetIds": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/definitions/WorldSnapshot/properties/id"
+                }
+              },
+              "claimIds": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/definitions/WorldSnapshot/properties/id"
+                }
+              },
+              "significance": {
+                "type": "string",
+                "enum": ["low", "medium", "high"]
+              }
+            },
+            "required": ["id", "summary", "targetIds", "claimIds", "significance"],
+            "additionalProperties": false
+          }
+        },
+        "protectionIds": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/WorldSnapshot/properties/id"
+          }
+        },
+        "coverage": {
+          "type": "object",
+          "properties": {
+            "searchedClasses": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": ["authority", "science", "news", "social", "sensor", "custom"]
+              }
+            },
+            "unavailableProviders": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "languages": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "limitations": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          "required": ["searchedClasses", "unavailableProviders", "languages", "limitations"],
+          "additionalProperties": false
+        },
+        "provenance": {
+          "type": "object",
+          "properties": {
+            "artifactIds": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/WorldSnapshot/properties/id"
+              }
+            },
+            "observedClaims": {
+              "type": "integer",
+              "minimum": 0
+            }
+          },
+          "required": ["artifactIds", "observedClaims"],
+          "additionalProperties": false
+        },
+        "simulation": {
+          "type": "object",
+          "properties": {
+            "baseSnapshotId": {
+              "$ref": "#/definitions/WorldSnapshot/properties/id"
+            },
+            "seed": {
+              "type": "integer"
+            },
+            "horizon": {
+              "type": "string"
+            },
+            "generatedAt": {
+              "$ref": "#/definitions/WorldSnapshot/properties/asOf"
+            }
+          },
+          "required": ["baseSnapshotId", "seed", "horizon", "generatedAt"],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "id",
+        "worldId",
+        "asOf",
+        "targetIds",
+        "entityIds",
+        "claimIds",
+        "materialChanges",
+        "protectionIds",
+        "coverage",
+        "provenance"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "$schema": "http://json-schema.org/draft-07/schema#"
+}

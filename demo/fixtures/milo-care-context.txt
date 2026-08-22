@@ -1,0 +1,1 @@
+Fictional user context: Milo remains in London with a known carer during the journey; animal-health signals should remain separate from human travel signals.

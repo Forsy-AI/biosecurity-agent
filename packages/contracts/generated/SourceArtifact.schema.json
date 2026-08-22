@@ -1,0 +1,79 @@
+{
+  "$ref": "#/definitions/SourceArtifact",
+  "definitions": {
+    "SourceArtifact": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 160
+        },
+        "providerId": {
+          "$ref": "#/definitions/SourceArtifact/properties/id"
+        },
+        "sourceClass": {
+          "type": "string",
+          "enum": ["authority", "science", "news", "social", "sensor", "custom"]
+        },
+        "url": {
+          "type": "string",
+          "format": "uri"
+        },
+        "title": {
+          "type": "string"
+        },
+        "author": {
+          "type": "string"
+        },
+        "language": {
+          "type": "string"
+        },
+        "publishedAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "observedAt": {
+          "$ref": "#/definitions/SourceArtifact/properties/publishedAt"
+        },
+        "retrievedAt": {
+          "$ref": "#/definitions/SourceArtifact/properties/publishedAt"
+        },
+        "contentHash": {
+          "type": "string",
+          "minLength": 16
+        },
+        "rawStorageRef": {
+          "type": "string",
+          "minLength": 1
+        },
+        "licence": {
+          "type": "string"
+        },
+        "redistribution": {
+          "type": "string"
+        },
+        "trustMetadata": {
+          "type": "object",
+          "additionalProperties": {},
+          "default": {}
+        },
+        "securityState": {
+          "type": "string",
+          "enum": ["accepted", "quarantined", "rejected"]
+        }
+      },
+      "required": [
+        "id",
+        "providerId",
+        "sourceClass",
+        "retrievedAt",
+        "contentHash",
+        "rawStorageRef",
+        "securityState"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "$schema": "http://json-schema.org/draft-07/schema#"
+}

@@ -1,0 +1,17 @@
+node_modules/
+.pnpm-store/
+**/dist/
+coverage/
+playwright-report/
+test-results/
+.biosecurity-agent/
+.env
+.env.*
+!.env.example
+*.db
+*.db-shm
+*.db-wal
+*.log
+!assets/terminal-replay.log
+.DS_Store
+huggingface-dataset-01/

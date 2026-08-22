@@ -1,0 +1,37 @@
+{
+  "agent": {
+    "provider": "codex",
+    "model": "default",
+    "instructions": "Build a defensive public One Health world. Preserve uncertainty and never diagnose a person or animal.",
+    "parameters": { "temperature": 0, "timeoutMs": 180000 }
+  },
+  "targets": [
+    {
+      "id": "ts03_beaches",
+      "name": "Cape Town public beaches",
+      "description": "Public beach environments around Cape Town, South Africa, considered in relation to the July 2026 WOAH Cape fur seal rabies update."
+    },
+    {
+      "id": "ts03_seals",
+      "name": "Southern African Cape fur seal population",
+      "description": "The public wildlife population of Cape fur seals along South Africa and Namibia."
+    },
+    {
+      "id": "ts03_dogwalk",
+      "name": "Synthetic dog-walking household near Cape Town beaches",
+      "description": "A synthetic composite household with a dog using public Cape Town beaches; no real people, pet, address, or health record."
+    }
+  ],
+  "customSources": [
+    {
+      "id": "ts03_woah_rabies",
+      "kind": "url",
+      "label": "WOAH Cape fur seal rabies statement",
+      "value": "https://www.woah.org/en/rabies-detected-in-cape-fur-seals-highlights-an-unprecedented-shift-in-rabies-ecology/",
+      "targetIds": ["ts03_beaches", "ts03_seals", "ts03_dogwalk"],
+      "enabled": true
+    }
+  ],
+  "notificationsEnabled": false,
+  "demo": false
+}

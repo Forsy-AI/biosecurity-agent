@@ -1,0 +1,137 @@
+{
+  "$ref": "#/definitions/Target",
+  "definitions": {
+    "Target": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 160
+        },
+        "name": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 200
+        },
+        "description": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 10000
+        },
+        "inferredKind": {
+          "type": "string"
+        },
+        "attributes": {
+          "type": "object",
+          "additionalProperties": {},
+          "default": {}
+        },
+        "locations": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "$ref": "#/definitions/Target/properties/id"
+              },
+              "label": {
+                "type": "string",
+                "minLength": 1
+              },
+              "latitude": {
+                "type": "number",
+                "minimum": -90,
+                "maximum": 90
+              },
+              "longitude": {
+                "type": "number",
+                "minimum": -180,
+                "maximum": 180
+              },
+              "resolution": {
+                "type": "string",
+                "enum": ["exact", "locality", "region", "country", "unknown"],
+                "default": "unknown"
+              }
+            },
+            "required": ["id", "label"],
+            "additionalProperties": false
+          },
+          "default": []
+        },
+        "relationships": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "$ref": "#/definitions/Target/properties/id"
+              },
+              "fromTargetId": {
+                "$ref": "#/definitions/Target/properties/id"
+              },
+              "toTargetId": {
+                "$ref": "#/definitions/Target/properties/id"
+              },
+              "type": {
+                "type": "string",
+                "minLength": 1
+              },
+              "label": {
+                "type": "string",
+                "minLength": 1
+              }
+            },
+            "required": ["id", "fromTargetId", "toTargetId", "type", "label"],
+            "additionalProperties": false
+          },
+          "default": []
+        },
+        "contextArtifacts": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "$ref": "#/definitions/Target/properties/id"
+              },
+              "filename": {
+                "type": "string",
+                "minLength": 1
+              },
+              "mediaType": {
+                "type": "string",
+                "minLength": 1
+              },
+              "size": {
+                "type": "number",
+                "minimum": 0
+              }
+            },
+            "required": ["id", "filename", "mediaType", "size"],
+            "additionalProperties": false
+          },
+          "default": []
+        },
+        "customSourceIds": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Target/properties/id"
+          },
+          "default": []
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "updatedAt": {
+          "$ref": "#/definitions/Target/properties/createdAt"
+        }
+      },
+      "required": ["id", "name", "description", "createdAt", "updatedAt"],
+      "additionalProperties": false
+    }
+  },
+  "$schema": "http://json-schema.org/draft-07/schema#"
+}

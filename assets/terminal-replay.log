@@ -1,0 +1,192 @@
+
+BIOSECURITY WORLD BUILD
+
+TARGET MODELLING
+  ✓ Agent result retained; deterministic target fallback required
+  ✓ London household structured as group
+  ✓ Query created · EN · London household group London, United Kingdom health surveillance alerts recalls
+  ✓ Milo structured as animal
+  ✓ Query created · EN · Milo animal London, United Kingdom health surveillance alerts recalls
+  ✓ Heathrow → Singapore journey structured as general
+  ✓ Query created · EN · Heathrow → Singapore journey general London, United Kingdom health surveillance alerts recalls
+
+OFFICIAL + SCIENTIFIC
+  ✓ Frozen scenario · international outbreak coordination bulletin searched
+  ✓ Frozen scenario · international outbreak coordination bulletin retrieved and isolated
+  ✓ Language detected · EN
+  ✓ Frozen scenario · multi-region epidemiology evidence review searched
+  ✓ Frozen scenario · multi-region epidemiology evidence review retrieved and isolated
+  ✓ Language detected · EN
+  ✓ Frozen scenario · UK port-health enhanced monitoring notice searched
+  ✓ Frozen scenario · UK port-health enhanced monitoring notice retrieved and isolated
+  ✓ Language detected · EN
+  ✓ Frozen scenario · companion-animal interface review searched
+  ✓ Frozen scenario · companion-animal interface review retrieved and isolated
+  ✓ Language detected · EN
+  ✓ Frozen scenario · Singapore travel-health update searched
+  ✓ Frozen scenario · Singapore travel-health update retrieved and isolated
+  ✓ Language detected · EN
+
+NEWS + OPEN WEB
+  ✓ Frozen scenario · Dubai transfer-hub disruption report searched
+  ✓ Frozen scenario · Dubai transfer-hub disruption report retrieved and isolated
+  ✓ Language detected · EN
+  ✓ Frozen scenario · East Africa response network report searched
+  ✓ Frozen scenario · East Africa response network report retrieved and isolated
+  ✓ Language detected · EN
+  ✓ Frozen scenario · London household preparedness report searched
+  ✓ Frozen scenario · London household preparedness report retrieved and isolated
+  ✓ Language detected · EN
+  ✓ Frozen scenario · international air-network movement report searched
+  ✓ Frozen scenario · international air-network movement report retrieved and isolated
+  ✓ Language detected · EN
+
+SOCIAL + COMMUNITY
+  ✓ Frozen scenario · Heathrow passenger report cluster searched
+  ✓ Frozen scenario · Heathrow passenger report cluster retrieved and isolated
+  ✓ Language detected · EN
+  ✓ Frozen scenario · London neighbourhood report cluster searched
+  ✓ Frozen scenario · London neighbourhood report cluster retrieved and isolated
+  ✓ Language detected · EN
+  ✓ Frozen scenario · companion-animal owner report cluster searched
+  ✓ Frozen scenario · companion-animal owner report cluster retrieved and isolated
+  ✓ Language detected · EN
+
+SENSORS + SURVEILLANCE
+  ✓ Frozen scenario · Central Africa syndromic index searched
+  ✓ Frozen scenario · Central Africa syndromic index retrieved and isolated
+  ✓ Language detected · EN
+  ✓ Frozen scenario · Nairobi airport screening index searched
+  ✓ Frozen scenario · Nairobi airport screening index retrieved and isolated
+  ✓ Language detected · EN
+  ✓ Frozen scenario · London wastewater reporting index searched
+  ✓ Frozen scenario · London wastewater reporting index retrieved and isolated
+  ✓ Language detected · EN
+  ✓ Frozen scenario · Heathrow passenger-flow sensor searched
+  ✓ Frozen scenario · Heathrow passenger-flow sensor retrieved and isolated
+  ✓ Language detected · EN
+
+CUSTOM SOURCES
+  ✓ Frozen scenario · household journey context searched
+  ✓ Frozen scenario · household journey context retrieved and isolated
+  ✓ Language detected · EN
+  ✓ Frozen scenario · Milo care context searched
+  ✓ Frozen scenario · Milo care context retrieved and isolated
+  ✓ Language detected · EN
+
+WORLD SYNTHESIS
+  ✓ Central Africa event signal resolved
+  ✓ international-monitoring-signal claim extracted
+  ✓ Central Africa event signal linked to Heathrow → Singapore journey
+  ✓ Central Africa event signal connected to Heathrow → Singapore journey
+  ✓ International evidence review resolved
+  ✓ travel-association-context claim extracted
+  ✓ International evidence review linked to Heathrow → Singapore journey
+  ✓ International evidence review connected to Heathrow → Singapore journey
+  ✓ Heathrow arrival surveillance resolved
+  ✓ arrival-monitoring-status claim extracted
+  ✓ Heathrow arrival surveillance linked to Heathrow → Singapore journey
+  ✓ Heathrow arrival surveillance connected to Heathrow → Singapore journey
+  ✓ London companion-animal network resolved
+  ✓ host-surveillance-context claim extracted
+  ✓ London companion-animal network linked to Milo
+  ✓ London companion-animal network connected to Milo
+  ✓ Singapore travel-health posture resolved
+  ✓ destination-monitoring-status claim extracted
+  ✓ Singapore travel-health posture linked to Heathrow → Singapore journey
+  ✓ Singapore travel-health posture connected to Heathrow → Singapore journey
+  ✓ Dubai transfer corridor resolved
+  ✓ route-disruption-context claim extracted
+  ✓ Dubai transfer corridor linked to Heathrow → Singapore journey
+  ✓ Dubai transfer corridor connected to Heathrow → Singapore journey
+  ✓ Nairobi response network resolved
+  ✓ regional-response-status claim extracted
+  ✓ Nairobi response network linked to Heathrow → Singapore journey
+  ✓ Nairobi response network connected to Heathrow → Singapore journey
+  ✓ London community preparedness resolved
+  ✓ preparedness-guidance-context claim extracted
+  ✓ London community preparedness linked to London household
+  ✓ London community preparedness connected to London household
+  ✓ Intercontinental passenger network resolved
+  ✓ movement-network-context claim extracted
+  ✓ Intercontinental passenger network linked to Heathrow → Singapore journey
+  ✓ Intercontinental passenger network connected to Heathrow → Singapore journey
+  ✓ Heathrow public report cluster resolved
+  ✓ community-operational-signal claim extracted
+  ✓ Heathrow public report cluster linked to Heathrow → Singapore journey
+  ✓ Heathrow public report cluster connected to Heathrow → Singapore journey
+  ✓ London public report cluster resolved
+  ✓ community-health-signal claim extracted
+  ✓ London public report cluster linked to London household
+  ✓ London public report cluster connected to London household
+  ✓ Companion-animal public reports resolved
+  ✓ community-animal-signal claim extracted
+  ✓ Companion-animal public reports linked to Milo
+  ✓ Companion-animal public reports connected to Milo
+  ✓ Kinshasa syndromic sensor resolved
+  ✓ surveillance-index-change claim extracted
+  ✓ Kinshasa syndromic sensor linked to Heathrow → Singapore journey
+  ✓ Kinshasa syndromic sensor connected to Heathrow → Singapore journey
+  ✓ Nairobi airport surveillance resolved
+  ✓ screening-volume-change claim extracted
+  ✓ Nairobi airport surveillance linked to Heathrow → Singapore journey
+  ✓ Nairobi airport surveillance connected to Heathrow → Singapore journey
+  ✓ London wastewater surveillance resolved
+  ✓ environmental-surveillance-change claim extracted
+  ✓ London wastewater surveillance linked to London household
+  ✓ London wastewater surveillance connected to London household
+  ✓ Heathrow passenger-flow system resolved
+  ✓ target-route-intersection claim extracted
+  ✓ Heathrow passenger-flow system linked to Heathrow → Singapore journey
+  ✓ Heathrow passenger-flow system connected to Heathrow → Singapore journey
+  ✓ Household journey plan resolved
+  ✓ target-travel-context claim extracted
+  ✓ Household journey plan linked to London household
+  ✓ Household journey plan connected to London household
+  ✓ Milo care plan resolved
+  ✓ target-care-context claim extracted
+  ✓ Milo care plan linked to Milo
+  ✓ Milo care plan connected to Milo
+
+LIVE WATCH
+  ✓ Watcher created for London household
+  ✓ Watcher created for Milo
+  ✓ Watcher created for Heathrow → Singapore journey
+  ✓ Target-centred world snapshot persisted
+  ✓ World construction complete · live tracking active
+
+World construction complete
+  18 entities · 18 relationships · 18 target intersections
+  ● 3 watchers active
+
+┌─ LIVE BIOSECURITY ──────────────────────────────────────────┐
+│  3 targets ·  3 watchers ·  18 sources · persisted locally
+└──────────────────────────────────────────────────────────────┘
+
+LONDON HOUSEHOLD
+  ◐ Changing
+  4 evidence records have explicit target relevance.
+
+MILO
+  ◐ Changing
+  3 evidence records have explicit target relevance.
+
+HEATHROW → SINGAPORE JOURNEY
+  ◐ Changing
+  11 evidence records have explicit target relevance.
+
+Observed 18 · Simulation snapshots 0 · telemetry off
+
+Agent
+  Monitoring all targets continuously. Type `help` for natural commands.
+
+›  
+01:02:14 AM  LIVE      Confirm the signal against current official guidance
+
+01:02:14 AM  WORLD     Simulation completed · 14d · seed 1414
+
+01:02:14 AM  LIVE      Watcher active · EN · London, United Kingdom
+
+01:02:14 AM  LIVE      Watcher active · EN · London, United Kingdom
+
+01:02:14 AM  LIVE      Watcher active · EN · London, United Kingdom

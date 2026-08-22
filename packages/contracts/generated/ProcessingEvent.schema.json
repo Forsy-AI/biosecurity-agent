@@ -1,0 +1,64 @@
+{
+  "$ref": "#/definitions/ProcessingEvent",
+  "definitions": {
+    "ProcessingEvent": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 160
+        },
+        "runId": {
+          "$ref": "#/definitions/ProcessingEvent/properties/id"
+        },
+        "lane": {
+          "type": "string",
+          "enum": [
+            "TARGET MODELLING",
+            "OFFICIAL & SCIENTIFIC",
+            "NEWS & OPEN WEB",
+            "SOCIAL & COMMUNITY",
+            "SENSORS & SURVEILLANCE",
+            "CUSTOM SOURCES",
+            "WORLD SYNTHESIS",
+            "LIVE WATCH"
+          ]
+        },
+        "type": {
+          "type": "string",
+          "minLength": 1
+        },
+        "status": {
+          "type": "string",
+          "enum": ["started", "progress", "completed", "failed"]
+        },
+        "label": {
+          "type": "string",
+          "minLength": 1
+        },
+        "entityId": {
+          "$ref": "#/definitions/ProcessingEvent/properties/id"
+        },
+        "artifactId": {
+          "$ref": "#/definitions/ProcessingEvent/properties/id"
+        },
+        "countDelta": {
+          "type": "integer"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "metadata": {
+          "type": "object",
+          "additionalProperties": {},
+          "default": {}
+        }
+      },
+      "required": ["id", "runId", "lane", "type", "status", "label", "createdAt"],
+      "additionalProperties": false
+    }
+  },
+  "$schema": "http://json-schema.org/draft-07/schema#"
+}

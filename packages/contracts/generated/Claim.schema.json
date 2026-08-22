@@ -1,0 +1,152 @@
+{
+  "$ref": "#/definitions/Claim",
+  "definitions": {
+    "Claim": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 160
+        },
+        "artifactId": {
+          "$ref": "#/definitions/Claim/properties/id"
+        },
+        "subject": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "$ref": "#/definitions/Claim/properties/id"
+            },
+            "label": {
+              "type": "string",
+              "minLength": 1
+            },
+            "kind": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "enum": [
+                    "target",
+                    "person",
+                    "group",
+                    "animal",
+                    "plant",
+                    "organism",
+                    "pathogen",
+                    "product",
+                    "ingredient",
+                    "lot",
+                    "company",
+                    "facility",
+                    "place",
+                    "event",
+                    "sensor",
+                    "observation",
+                    "document"
+                  ]
+                },
+                {
+                  "type": "string",
+                  "minLength": 1
+                }
+              ]
+            }
+          },
+          "required": ["id", "label", "kind"],
+          "additionalProperties": false
+        },
+        "predicate": {
+          "type": "string",
+          "minLength": 1
+        },
+        "object": {
+          "anyOf": [
+            {
+              "$ref": "#/definitions/Claim/properties/subject"
+            },
+            {
+              "type": ["string", "number", "boolean"]
+            }
+          ]
+        },
+        "time": {
+          "type": "object",
+          "properties": {
+            "start": {
+              "type": "string",
+              "format": "date-time"
+            },
+            "end": {
+              "$ref": "#/definitions/Claim/properties/time/properties/start"
+            },
+            "label": {
+              "type": "string"
+            }
+          },
+          "additionalProperties": false
+        },
+        "geography": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "$ref": "#/definitions/Claim/properties/id"
+            },
+            "label": {
+              "type": "string",
+              "minLength": 1
+            },
+            "latitude": {
+              "type": "number",
+              "minimum": -90,
+              "maximum": 90
+            },
+            "longitude": {
+              "type": "number",
+              "minimum": -180,
+              "maximum": 180
+            },
+            "resolution": {
+              "type": "string",
+              "enum": ["exact", "locality", "region", "country", "unknown"],
+              "default": "unknown"
+            }
+          },
+          "required": ["id", "label"],
+          "additionalProperties": false
+        },
+        "evidenceSpan": {
+          "type": "object",
+          "properties": {
+            "excerpt": {
+              "type": "string",
+              "maxLength": 2000
+            },
+            "start": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "end": {
+              "type": "integer",
+              "minimum": 0
+            }
+          },
+          "required": ["excerpt"],
+          "additionalProperties": false
+        },
+        "confidence": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "state": {
+          "type": "string",
+          "enum": ["observed", "inferred", "simulated"]
+        }
+      },
+      "required": ["id", "artifactId", "subject", "predicate", "object", "confidence", "state"],
+      "additionalProperties": false
+    }
+  },
+  "$schema": "http://json-schema.org/draft-07/schema#"
+}

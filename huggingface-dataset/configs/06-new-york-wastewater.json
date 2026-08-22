@@ -1,0 +1,37 @@
+{
+  "agent": {
+    "provider": "codex",
+    "model": "default",
+    "instructions": "Build a defensive community surveillance world. Wastewater is population context, not individual diagnosis.",
+    "parameters": { "temperature": 0, "timeoutMs": 180000 }
+  },
+  "targets": [
+    {
+      "id": "ts06_nwss",
+      "name": "New York City wastewater surveillance network",
+      "description": "The public New York City wastewater surveillance network and its role in community-level respiratory and emerging-pathogen monitoring."
+    },
+    {
+      "id": "ts06_schools",
+      "name": "New York City public school estate",
+      "description": "The public school-facility estate across New York City, considered only at aggregate community level."
+    },
+    {
+      "id": "ts06_household",
+      "name": "Synthetic New York City household",
+      "description": "A synthetic composite household in New York City using public aggregate surveillance context; no real people, address, or medical data."
+    }
+  ],
+  "customSources": [
+    {
+      "id": "ts06_cdc_nwss",
+      "kind": "url",
+      "label": "CDC NWSS programme overview",
+      "value": "https://www.cdc.gov/nwss/about.html",
+      "targetIds": ["ts06_nwss", "ts06_schools", "ts06_household"],
+      "enabled": true
+    }
+  ],
+  "notificationsEnabled": false,
+  "demo": false
+}

@@ -1,0 +1,117 @@
+{
+  "$ref": "#/definitions/SimulationPlan",
+  "definitions": {
+    "SimulationPlan": {
+      "type": "object",
+      "properties": {
+        "baseSnapshotId": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 160
+        },
+        "horizon": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 100
+        },
+        "seed": {
+          "type": "integer"
+        },
+        "assumptions": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "$ref": "#/definitions/SimulationPlan/properties/baseSnapshotId"
+              },
+              "statement": {
+                "type": "string",
+                "minLength": 1
+              },
+              "source": {
+                "type": "string",
+                "enum": ["user", "agent"]
+              }
+            },
+            "required": ["id", "statement", "source"],
+            "additionalProperties": false
+          }
+        },
+        "variables": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "$ref": "#/definitions/SimulationPlan/properties/baseSnapshotId"
+              },
+              "name": {
+                "type": "string"
+              },
+              "initialValue": {
+                "type": "number"
+              },
+              "unit": {
+                "type": "string"
+              },
+              "uncertainty": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 1
+              }
+            },
+            "required": ["id", "name", "initialValue", "unit", "uncertainty"],
+            "additionalProperties": false
+          }
+        },
+        "transitionRules": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "$ref": "#/definitions/SimulationPlan/properties/baseSnapshotId"
+              },
+              "description": {
+                "type": "string"
+              },
+              "expression": {
+                "type": "string"
+              },
+              "safetyClass": {
+                "type": "string",
+                "const": "abstract-defensive"
+              }
+            },
+            "required": ["id", "description", "expression", "safetyClass"],
+            "additionalProperties": false
+          }
+        },
+        "targetIds": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SimulationPlan/properties/baseSnapshotId"
+          },
+          "minItems": 1
+        },
+        "safetyClassification": {
+          "type": "string",
+          "const": "defensive-forecast"
+        }
+      },
+      "required": [
+        "baseSnapshotId",
+        "horizon",
+        "seed",
+        "assumptions",
+        "variables",
+        "transitionRules",
+        "targetIds",
+        "safetyClassification"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "$schema": "http://json-schema.org/draft-07/schema#"
+}
