@@ -44,3 +44,21 @@ test("viewer remains a single read-only visual page on mobile", async ({ page })
   );
   expect(overflow).toBeLessThanOrEqual(1);
 });
+
+test("viewer renders only the latest simulation with its real horizon", async ({
+  page,
+  request,
+}) => {
+  const latest = await request.get("http://127.0.0.1:7331/api/runs/latest");
+  const world = await latest.json();
+  const simulated = await request.post(
+    `http://127.0.0.1:7331/api/runs/${world.runId}/simulations`,
+    { data: { horizon: "24h", seed: 7331 } },
+  );
+  expect(simulated.ok()).toBe(true);
+  await page.goto("/");
+  await expect(page.getByText("SIMULATION · +24H")).toBeVisible();
+  const labels = await page.locator(".intel-node.simulated strong").allTextContents();
+  expect(labels).toHaveLength(3);
+  expect(labels.every((label) => label.endsWith("· +24h"))).toBe(true);
+});

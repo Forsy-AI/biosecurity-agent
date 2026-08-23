@@ -1,4 +1,5 @@
 import { mkdtemp } from "node:fs/promises";
+import type { AddressInfo } from "node:net";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { afterEach, describe, expect, it } from "vitest";
@@ -36,6 +37,34 @@ describe("local API", () => {
     await expect(
       startServer({ memory: true, host: "0.0.0.0", port: 0, serveWeb: false }),
     ).rejects.toThrow("Wildcard HTTP binds are prohibited");
+  });
+
+  it("closes cleanly while a viewer event stream is connected", async () => {
+    const app = await startServer({
+      memory: true,
+      port: 0,
+      eventDelayMs: 0,
+      serveWeb: false,
+    });
+    apps.push(app);
+    const start = await app.inject({ method: "POST", url: "/api/demo/start" });
+    const runId = start.json().runId;
+    await waitForLive(app, runId);
+    const address = app.server.address() as AddressInfo;
+    const controller = new AbortController();
+    const stream = await fetch(`http://127.0.0.1:${address.port}/api/events/${runId}`, {
+      signal: controller.signal,
+    });
+    expect(stream.status).toBe(200);
+    const closed = app.close().then(() => true);
+    await expect(
+      Promise.race([
+        closed,
+        new Promise<boolean>((resolve) => setTimeout(() => resolve(false), 750)),
+      ]),
+    ).resolves.toBe(true);
+    controller.abort();
+    apps.splice(apps.indexOf(app), 1);
   });
 
   it("runs the complete no-key demo without a notification dependency", async () => {
@@ -131,6 +160,13 @@ describe("local API", () => {
       payload: { decision: "reject" },
     });
     expect(rejected.json().executed).toBe(false);
+    const afterRejection = (await app.inject({ method: "GET", url: `/api/runs/${runId}` })).json();
+    expect(afterRejection.protections[0].status).toBe("dismissed");
+    expect(
+      app.biosecurity.database.db
+        .prepare("SELECT status, executed_at FROM tool_proposals WHERE id = ?")
+        .get(world.protections[0].toolProposal.id),
+    ).toEqual({ status: "rejected", executed_at: null });
   });
 
   it("quarantines prompt-injected webhook content", async () => {

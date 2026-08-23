@@ -15,3 +15,4 @@ test-results/
 !assets/terminal-replay.log
 .DS_Store
 huggingface-dataset-01/
+*.tgz

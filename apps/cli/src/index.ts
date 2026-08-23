@@ -417,6 +417,7 @@ async function attachContextToTarget(
   const accepted = files
     .filter((file) => file.securityState === "accepted")
     .map(({ securityState: _securityState, ...artifact }) => artifact);
+  if (!accepted.length) return target;
   const existing = new Map(target.contextArtifacts.map((artifact) => [artifact.id, artifact]));
   for (const artifact of accepted) existing.set(artifact.id, artifact);
   return request<Target>(app, "PATCH", `/api/runs/${runId}/targets/${target.id}`, {
@@ -668,7 +669,7 @@ async function handleNatural(
       files
         .map(
           (file) =>
-            `  ✓ ${file.filename} stored locally · ${file.securityState}${target ? ` · linked to ${target.name}` : ""}`,
+            `  ✓ ${file.filename} stored locally · ${file.securityState}${target && file.securityState === "accepted" ? ` · linked to ${target.name}` : ""}`,
         )
         .join("\n"),
     );
@@ -1057,7 +1058,7 @@ const program = new Command();
 program
   .name("biosecurity-agent")
   .description("Terminal-native target-centred biosecurity intelligence agent")
-  .version("0.1.0")
+  .version("0.1.2")
   .option("--port <port>", "localhost viewer/API port", "7331")
   .option("--data-dir <path>", "local application data directory", ".biosecurity-agent")
   .option("--demo", "build the frozen no-key demonstration")
@@ -1203,7 +1204,7 @@ context
         files
           .map(
             (item) =>
-              `${item.filename}\t${item.securityState}${target ? `\tlinked to ${target.name}` : ""}`,
+              `${item.filename}\t${item.securityState}${target && item.securityState === "accepted" ? `\tlinked to ${target.name}` : ""}`,
           )
           .join("\n"),
       );
@@ -1261,8 +1262,8 @@ program
     });
     try {
       const world = await createWorld(app, await loadRunConfig(config), output, options.verbose);
-      if (!options.headless) printStatus(world, output);
-      else await new Promise<void>(() => undefined);
+      if (options.headless) await new Promise<void>(() => undefined);
+      else if (output.mode !== "json") printStatus(world, output);
     } finally {
       await app.close();
     }

@@ -36,7 +36,8 @@ export function parseNaturalCommand(raw: string): NaturalCommand {
   if (/^(approve|run it|yes,? run it)$/.test(lower)) return { type: "approve" };
   if (/^(reject|dismiss|do not run it)$/.test(lower)) return { type: "reject" };
   if (/^(show )?(protection|protections|suggestions)$/.test(lower)) return { type: "protection" };
-  if (/what changed|changes since|latest update/.test(lower)) return { type: "changes" };
+  if (/what changed|changes since|latest update|most relevant update/.test(lower))
+    return { type: "changes" };
   if (/^(show sources|explain|show evidence|evidence)/.test(lower)) {
     return {
       type: "evidence",
@@ -47,9 +48,12 @@ export function parseNaturalCommand(raw: string): NaturalCommand {
   const simulation = input.match(/^simulate(?:\s+(.*))?$/i);
   if (simulation) {
     const detail = simulation[1]?.trim() ?? "the next 30 days";
-    const duration = detail.match(/(?:next\s+)?(\d+)\s*(day|days|d|week|weeks|w|month|months|m)/i);
+    const duration = detail.match(
+      /(?:next\s+)?(\d+)\s*(hour|hours|h|day|days|d|week|weeks|w|month|months|m)/i,
+    );
+    const unit = duration?.[2]?.toLowerCase();
     const horizon = duration
-      ? `${duration[1]}${duration[2]!.toLowerCase().startsWith("w") ? "w" : duration[2]!.toLowerCase().startsWith("m") ? "m" : "d"}`
+      ? `${duration[1]}${unit?.startsWith("h") ? "h" : unit?.startsWith("w") ? "w" : unit?.startsWith("m") ? "m" : "d"}`
       : "30d";
     return { type: "simulate", horizon, extraContext: detail };
   }

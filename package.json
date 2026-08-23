@@ -1,6 +1,6 @@
 {
   "name": "@forsy/biosecurity-agent",
-  "version": "0.1.0",
+  "version": "0.1.2",
   "private": false,
   "type": "module",
   "description": "A local-first, target-centred biosecurity intelligence agent.",

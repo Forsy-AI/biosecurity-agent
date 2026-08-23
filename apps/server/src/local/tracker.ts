@@ -132,7 +132,7 @@ export class LiveTracker {
     > = {},
   ): Promise<void> {
     const snapshots = this.database.listSnapshots(watcher.runId);
-    const previous = snapshots.at(-1);
+    const previous = snapshots.filter((snapshot) => !snapshot.simulation).at(-1);
     if (!previous) return;
     const event = ProcessingEventSchema.parse({
       id: `event_watch_${nanoid(10)}`,

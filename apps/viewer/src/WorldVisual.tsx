@@ -157,8 +157,11 @@ export function WorldVisual({
           className: claim?.state ?? "inferred",
         });
     });
+    const latestSimulation = [...world.snapshots].reverse().find((snapshot) => snapshot.simulation);
+    const latestSimulationClaimIds = new Set(latestSimulation?.claimIds ?? []);
+    const horizon = latestSimulation?.simulation?.horizon ?? "future";
     world.claims
-      .filter((claim) => claim.state === "simulated")
+      .filter((claim) => claim.state === "simulated" && latestSimulationClaimIds.has(claim.id))
       .slice(0, 3)
       .forEach((claim, index) => {
         const target = world.targets.find((item) => item.id === claim.subject.id);
@@ -167,7 +170,7 @@ export function WorldVisual({
           type: "intel",
           position: { x: 670, y: 60 + index * 145 },
           data: {
-            label: target ? `${target.name} · +14 days` : `Future impact ${index + 1}`,
+            label: target ? `${target.name} · +${horizon}` : `Future impact ${index + 1}`,
             kind: "future",
             state: "simulated",
             detail: String(claim.object),

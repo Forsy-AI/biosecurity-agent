@@ -15,7 +15,7 @@ npx @forsy/biosecurity-agent
 From this release candidate:
 
 ```bash
-npm install ./forsy-biosecurity-agent-0.1.0.tgz
+npm install ./forsy-biosecurity-agent-0.1.2.tgz
 npx biosecurity-agent
 ```
 

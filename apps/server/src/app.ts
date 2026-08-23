@@ -1,4 +1,5 @@
 import { access, mkdir, readFile, writeFile } from "node:fs/promises";
+import type { ServerResponse } from "node:http";
 import { basename, join, resolve } from "node:path";
 import cors from "@fastify/cors";
 import multipart from "@fastify/multipart";
@@ -193,6 +194,7 @@ export async function buildServer(options: ServerOptions = {}): Promise<FastifyI
     bodyLimit: 6 * 1024 * 1024,
   });
   const jobs = new Set<Promise<void>>();
+  const eventStreams = new Set<ServerResponse>();
   app.decorate("biosecurity", { database, secrets, redactor, tracker, notifications, jobs });
 
   await app.register(cors, {
@@ -551,6 +553,7 @@ export async function buildServer(options: ServerOptions = {}): Promise<FastifyI
       connection: "keep-alive",
       "x-accel-buffering": "no",
     });
+    eventStreams.add(reply.raw);
     for (const event of database.listEvents(runId))
       reply.raw.write(`event: processing\ndata: ${JSON.stringify(event)}\n\n`);
     const unsubscribe = database.subscribe(runId, (event) => {
@@ -560,6 +563,7 @@ export async function buildServer(options: ServerOptions = {}): Promise<FastifyI
     request.raw.on("close", () => {
       clearInterval(heartbeat);
       unsubscribe();
+      eventStreams.delete(reply.raw);
     });
   });
 
@@ -649,13 +653,16 @@ export async function buildServer(options: ServerOptions = {}): Promise<FastifyI
       .listTargets(request.params.runId)
       .find((target) => target.id === request.params.targetId);
     if (!current) throw new Error("Target not found");
-    const [remodelled] = modelTargets([
-      {
-        id: current.id,
-        name: request.body.name ?? current.name,
-        description: request.body.description ?? current.description,
-      },
-    ]);
+    const shouldRemodel = request.body.name !== undefined || request.body.description !== undefined;
+    const remodelled = shouldRemodel
+      ? modelTargets([
+          {
+            id: current.id,
+            name: request.body.name ?? current.name,
+            description: request.body.description ?? current.description,
+          },
+        ])[0]
+      : current;
     if (!remodelled) throw new Error("Target could not be remodelled");
     const updated = TargetSchema.parse({
       ...remodelled,
@@ -667,15 +674,20 @@ export async function buildServer(options: ServerOptions = {}): Promise<FastifyI
       updatedAt: new Date().toISOString(),
     });
     database.saveTarget(request.params.runId, updated);
-    for (const watcher of database
-      .listWatchers(request.params.runId)
-      .filter((item) => item.targetIds.includes(updated.id))) {
-      database.saveWatcher({
-        ...watcher,
-        query: buildInvestigationPlan(updated)[0]!.query,
-        geography: updated.locations[0]?.label ?? "unspecified",
-      });
-    }
+    const shouldReplan =
+      shouldRemodel ||
+      request.body.inferredKind !== undefined ||
+      request.body.attributes !== undefined;
+    if (shouldReplan)
+      for (const watcher of database
+        .listWatchers(request.params.runId)
+        .filter((item) => item.targetIds.includes(updated.id))) {
+        database.saveWatcher({
+          ...watcher,
+          query: buildInvestigationPlan(updated)[0]!.query,
+          geography: updated.locations[0]?.label ?? "unspecified",
+        });
+      }
     database.saveEvent(
       ProcessingEventSchema.parse({
         id: `event_${nanoid(10)}`,
@@ -683,7 +695,9 @@ export async function buildServer(options: ServerOptions = {}): Promise<FastifyI
         lane: "TARGET MODELLING",
         type: "target.updated",
         status: "completed",
-        label: `${updated.name} updated and watchers replanned`,
+        label: shouldReplan
+          ? `${updated.name} updated and watchers replanned`
+          : `${updated.name} context references updated`,
         entityId: updated.id,
         createdAt: new Date().toISOString(),
         metadata: { userEdited: true },
@@ -1003,6 +1017,10 @@ export async function buildServer(options: ServerOptions = {}): Promise<FastifyI
   }
 
   app.addHook("onReady", async () => tracker.start());
+  app.addHook("preClose", async () => {
+    for (const stream of eventStreams) stream.end();
+    eventStreams.clear();
+  });
   app.addHook("onClose", async () => {
     await tracker.stop();
     await Promise.allSettled(jobs);

@@ -71,9 +71,10 @@ export function decideToolProposal(
   const protection = database.listProtections(runId).find((entry) => entry.id === protectionId);
   if (!protection?.toolProposal) throw new Error("Tool proposal not found");
   if (decision === "reject") {
+    const dismissed = database.updateProtectionStatus(runId, protectionId, "dismissed");
     database.updateToolProposal(protection.toolProposal.id, "rejected");
     return {
-      protection: database.updateProtectionStatus(runId, protectionId, "dismissed"),
+      protection: dismissed,
       executed: false,
       auditMessage: "Proposal rejected; no action executed.",
     };
@@ -81,9 +82,10 @@ export function decideToolProposal(
   if (protection.toolProposal.tool !== "local.mock-reminder")
     throw new Error("Tool is not registered");
   if (!protection.toolProposal.approvalRequired) throw new Error("Unexpected approval policy");
+  const executed = database.updateProtectionStatus(runId, protectionId, "executed");
   database.updateToolProposal(protection.toolProposal.id, "executed");
   return {
-    protection: database.updateProtectionStatus(runId, protectionId, "executed"),
+    protection: executed,
     executed: true,
     auditMessage: `Approved harmless local reminder: ${String(protection.toolProposal.arguments.message)}`,
   };
