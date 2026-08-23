@@ -1,6 +1,6 @@
 # Biosecurity Agent
 
-The AI agent builds a personalised, live biosecurity world around your targets, tracks what changes, predicts what may happen next, and recommends evidence-backed protection.
+AI agent that builds a live biosecurity world around any target.
 
 ![Biosecurity Agent visual world](assets/bioworld.png)
 
