@@ -1,10 +1,6 @@
 # Biosecurity Agent
 
-**Open source by Forsy**
-
-Give your AI agent anything to protect. It builds a personalised, live biosecurity world around your targets, tracks what changes, predicts what may happen next, and recommends evidence-backed protection.
-
-**AI agent + targets → global biosecurity world → tracking → prediction → protection**
+The AI agent builds a personalised, live biosecurity world around your targets, tracks what changes, predicts what may happen next, and recommends evidence-backed protection.
 
 ![Biosecurity Agent visual world](assets/bioworld.png)
 
