@@ -1,4 +1,4 @@
-# Biosecurity Agent Harness Proto v0.1
+# Biosecurity Agent Harness v0.1
 
 AI agent that builds a live biosecurity world around any target.
 
