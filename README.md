@@ -68,7 +68,7 @@ All agents and model providers are supported through the OpenAI-compatible adapt
 
 ## Privacy + safety
 
-Biosecurity Agent runs locally. Targets, files, and secrets are not uploaded to Forsy by default. External content is treated as untrusted, actions require explicit permissions, and the project is designed for defensive biosecurity—not pathogen engineering or clinical diagnosis.
+Biosecurity Agent runs locally. Targets, files, and secrets are not uploaded to us by default. External content is treated as untrusted, actions require explicit permissions, and the project is designed for defensive biosecurity, not pathogen engineering or clinical diagnosis.
 
 ## Dataset
 
