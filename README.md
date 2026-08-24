@@ -6,17 +6,8 @@ AI agent that builds a live biosecurity world around any target.
 
 ## Quick Start
 
-After npm publication:
-
 ```bash
 npx @forsy/biosecurity-agent
-```
-
-From this release candidate:
-
-```bash
-npm install ./forsy-biosecurity-agent-0.1.2.tgz
-npx biosecurity-agent
 ```
 
 Configure your AI agent. Tell it what to protect. It starts investigating and tracking automatically.
