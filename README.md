@@ -29,7 +29,7 @@ Describe people, animals, plants, products, places, organisations, or multiple c
 
 ### 2. Live biosecurity
 
-Your agent investigates official and scientific sources, news and the open web, public OSINT, sensors and surveillance, and connected data. It builds a target-centred biosecurity world, links evidence across places and time, and keeps that world updated in the background.
+Your agent tracks official and scientific sources, news and the open web, public OSINT, sensors and surveillance, and connected data. It builds a target-centred biosecurity world, links evidence across places and time, and keeps that world updated in the background.
 
 ### 3. Predict + protect
 
