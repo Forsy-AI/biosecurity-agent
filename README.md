@@ -23,8 +23,6 @@ Configure your AI agent. Tell it what to protect. It starts investigating and tr
 
 Start with one target or a connected set, then refine them conversationally as the world changes. The terminal exposes each real processing lane from discovery and retrieval through claim extraction and synthesis while keeping the underlying evidence inspectable. Exit whenever you like; the local runtime restores the same targets, watchers, and world on your next launch.
 
-## What happens
-
 ### 1. Define targets
 
 Describe people, animals, plants, products, places, organisations, or multiple connected targets in ordinary language. Files, private context, public URLs, and custom sources can add the details that make evidence relevant to you.
