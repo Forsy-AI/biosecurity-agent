@@ -1,4 +1,4 @@
-# Biosecurity Agent
+# Biosecurity Agent Harness Proto v0.1
 
 AI agent that builds a live biosecurity world around any target.
 
@@ -72,7 +72,7 @@ Biosecurity Agent runs locally. Targets, files, and secrets are not uploaded to 
 
 ## Dataset
 
-https://huggingface.co/datasets/Forsy-AI/BiosecurityAgent01
+https://huggingface.co/datasets/Forsy-AI/BiosecurityAgent01-SeedDataset
 
 ## License
 
